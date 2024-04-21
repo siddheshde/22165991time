@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-cvgm$@w(e4^f8g+ci-0q4j(d5eaenps^l&6tc2u)^)t!#1zq77
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['agecalculator.us-east-1.elasticbeanstalk.com','127.0.0.1']
 
 
 # Application definition
