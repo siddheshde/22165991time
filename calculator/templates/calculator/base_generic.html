@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Site{% endblock %}</title>
+    <!-- Add this inside the <head> tag in your base_generic.html -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Add your CSS files here -->
+</head>
+<body>
+    {% block content %}
+    <!-- The main content will be inserted here by inheriting templates. -->
+    {% endblock content %}
+</body>
+</html>

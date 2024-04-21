@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Days Countdown</title>
+
+    <style>
+        body {
+            background-color: #1e0342; /* Darkest color for the background */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin-top: 50px;
+            padding-top: 50px; /* Added padding to account for fixed nav height */
+            color: #f7f5f5; /* Lightest color for text */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        nav {
+            position: fixed; /* Fix the nav at the top */
+            top: 0; /* Set the nav to the top */
+            left: 0; /* Stretch the nav from the left */
+            width: 100%; /* Full width */
+            background-color: #3e61a8; /* Second color for nav background */
+            padding: 10px 0;
+            box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+            z-index: 1000; /* Ensure nav stays on top of other content */
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #f7f5f5; /* Lightest color for nav links */
+            padding: 10px 20px;
+            transition: background-color 0.3s ease;
+            display: inline-block; /* Added to properly center links */
+        }
+        
+        nav a:hover {
+            background-color: #2e5090; /* Darken nav link on hover */
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            max-width: 800px; /* Set a max width for the container */
+            margin: auto; /* Center the container */
+        }
+
+        h1 {
+            margin: 20px 0;
+            color: #cde1f7; /* Second lightest color for headers */
+        }
+
+        #countdownForm {
+            background: none;
+            border: none;
+            padding: 20px;
+            box-shadow: none;
+        }
+
+        label {
+            margin-right: 10px;
+        }
+
+        input[type="text"], button {
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0; /* Margin adjusted for vertical spacing */
+        }
+
+        input[type="text"] {
+            background-color: #6a8ac8; /* Third color for input fields */
+            color: #f7f5f5; /* Lightest color for input text */
+            width: 200px; /* Adjusted width for better appearance */
+        }
+
+        button {
+            background-color: #3e61a8; /* Second color for buttons */
+            color: #f7f5f5; /* Lightest color for button text */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2e5090; /* Darken button on hover */
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f7f5f5; /* Lightest color for result box */
+            color: #1e0342; /* Darkest color for result text */
+            width: 300px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    
+    <nav>
+        <ul>
+            <a href="{% url 'calculator:home' %}">Age Calculator</a>
+            <a href="{% url 'calculator:days_countdown' %}">Days Countdown</a>
+            <a href="{% url 'calculator:astrology-facts' %}">Astrology Facts</a>
+            <a href="{% url 'calculator:signup' %}">Signup</a>
+            <a href="{% url 'calculator:login' %}">Login</a>
+
+        </ul>
+    </nav>
+    <h1>Days Countdown</h1>
+    <form id="countdownForm">
+        <label for="start_date">Start Date (DD-MM-YYYY):</label>
+        <input type="text" id="start_date" name="start_date" required>
+        <label for="end_date">End Date (DD-MM-YYYY):</label>
+        <input type="text" id="end_date" name="end_date" required>
+        <button type="submit">Calculate Days</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('countdownForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const startDate = document.getElementById('start_date').value;
+            const endDate = document.getElementById('end_date').value;
+            const params = new URLSearchParams({
+                start_date: startDate,
+                end_date: endDate
+            });
+            const apiUrl = `https://vxej5md2q9.execute-api.eu-west-1.amazonaws.com/default/x22208038-dayscountdown?${params}`;
+    
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data && typeof data.days_between !== 'undefined') {
+                        document.getElementById('result').textContent = 'Days between dates: ' + data.days_between;
+                    } else {
+                        console.error('Unexpected API response structure:', data);
+                        document.getElementById('result').textContent = 'Unexpected API response structure, check console for details';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('result').textContent = 'Failed to calculate days';
+                });
+        });
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!-- templates/calculator/your_date_input_template.html -->
+
+<html>
+  <head>
+    <title>Days Countdown</title>
+  </head>
+  <body>
+    <h1>Enter Start and End Dates</h1>
+    <form action="{% url 'days_countdown' %}" method="get">
+      <label for="start_date">Start date:</label>
+      <input type="date" id="start_date" name="start_date" required>
+
+      <label for="end_date">End date:</label>
+      <input type="date" id="end_date" name="end_date" required>
+
+      <input type="submit" value="Calculate Days">
+    </form>
+  </body>
+</html>

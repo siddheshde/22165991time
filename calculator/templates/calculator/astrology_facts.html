@@ -1,0 +1,36 @@
+{% extends 'calculator/base_generic.html' %}  <!-- Update this if you have a different base template -->
+
+{% block content %}
+<nav>
+    <ul>
+        <a href="{% url 'calculator:home' %}">Age Calculator</a>
+        <a href="{% url 'calculator:days_countdown' %}">Days Countdown</a>
+        <a href="{% url 'calculator:astrology-facts' %}">Astrology Facts</a>
+        <a href="{% url 'calculator:signup' %}">Signup</a>
+        <a href="{% url 'calculator:login' %}">Login</a>
+
+    </ul>
+</nav>
+
+
+<h2>Astrology Facts</h2>
+
+
+<div class="row">
+    {% for fact in facts %}
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ fact.sign }}</h5>
+                <p class="card-text">{{ fact.fact }}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<ul>
+    {% comment %} {% for fact in facts %}
+    <li><strong>{{ fact.sign }}:</strong> {{ fact.fact }}</li>
+    {% endfor %}
+</ul> {% endcomment %}
+{% endblock %}
