@@ -5,9 +5,6 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import BirthdateForm, SignUpForm, LoginForm
 from django.contrib.auth import login, authenticate
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
 from django.conf import settings
 from pathlib import Path
 
