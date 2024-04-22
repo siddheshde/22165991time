@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-cvgm$@w(e4^f8g+ci-0q4j(d5eaenps^l&6tc2u)^)t!#1zq77
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["timetracker22165991.us-east-1.elasticbeanstalk.com/"]
+ALLOWED_HOSTS = ["timetracker22165991.us-east-1.elasticbeanstalk.com"]
 
 # Application definition
 
