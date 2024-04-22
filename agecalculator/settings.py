@@ -29,7 +29,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['timetracker22165991.us-east-1.elasticbeanstalk.com']
 
-
 # Application definition
 
 INSTALLED_APPS = [
